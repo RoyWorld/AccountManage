@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <form method="post" enctype="multipart/form-data" role="form">
+            <table>
+                <tr>
+                    <td>File to upload:</td>
+                    <td><input id="upload" name="upload" type="file"/></td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" name="name"/></td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</body>
+
+<script>
+    var uploader = WebUpload.creat({
+        swf: "Uploader.swf"
+        , server: "fileUpload.php"
+        , pick: "#picker"
+        , resize: false
+        , dnd: "#theList"
+        , paste: document.body
+        , disableGlobalDnd: true
+        , thumb: {
+            width: 100
+            , height: 100
+            , quality: 70
+            , allowMagnify: true
+            , crop: true
+        }
+        , compress: false
+        , prepareNextFile: true
+        , chunked: true//是否分片
+        , chunkSize: 5000 * 1024//分片大小
+        , threads: true//是否使用线程
+        , formData: userInfo
+        , fileNumLimit: 1
+        , fileSingleSizeLimit: 1000 * 1024 * 1024
+        , duplicate: true
+    });
+
+
+</script>
+</html>

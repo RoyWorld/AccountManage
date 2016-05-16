@@ -1,0 +1,34 @@
+group 'spring'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+task createJavaProject() {
+
+    sourceSets*.java.srcDirs*.each{ mkdir(it.path) }
+
+    sourceSets*.resources.srcDirs*.each{ mkdir(it.path) }
+
+}
+
+task createSourceFile(){
+    //        创建目录文件
+    file("/src/main/java/com/common").mkdirs()
+    file('/src/main/java/com/common/package-info.java').createNewFile()
+    file("/src/main/resources").mkdirs()
+
+    file("src/test/java/com/common/util").mkdirs()
+    file('src/test/java/com/common/util/package-info.java').createNewFile()
+}
+
+dependencies {
+    //第三方的json依赖包
+    compile 'com.alibaba:fastjson:1.2.7'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

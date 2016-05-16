@@ -1,0 +1,37 @@
+group 'spring'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+
+sourceCompatibility = 1.5
+
+repositories {
+        mavenLocal()
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
+}
+
+dependencies {
+        //导入本地的依赖包
+//        compile fileTree(dir: 'libs', include: ['*.jar'])
+        //从maven仓库导入依赖
+
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+        testCompile group: 'log4j', name: 'log4j', version: '1.2.17'
+}
+
+task createJavaProject(){
+
+//        创建目录文件
+    file("/src/main/java").mkdirs()
+//    file('/src/main/java/com/viewmap/package-info.java').createNewFile()
+    file("/src/main/resources").mkdirs()
+    file("/src/main/resources/mybatis").mkdirs()
+    file('/src/main/resources/spring.xml').createNewFile()
+
+    file("src/test/java").mkdirs()
+//    file('src/test/java/com/viewmap/package-info.java').createNewFile()
+    file("/src/test/resources/mybatis").mkdirs()
+    file('src/test/resources/spring.xml').createNewFile()
+
+}

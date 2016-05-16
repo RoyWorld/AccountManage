@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.transation.dao.DemoDAO">
+
+    <insert id="insert" parameterType="com.transation.model.Fruit">
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select uuid()
+        </selectKey>
+        insert into fruit (id, name, price, country) VALUES (#{id}, #{name}, #{price}, #{country})
+    </insert>
+    
+    <update id="updata" parameterType="java.util.Map">
+        UPDATE FROM fruit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="map.name!=null">
+                name = #{map.name},
+            </if>
+            <if test="map.price!=null">
+                price = #{map.price},
+            </if>
+            <if test="map.country!=null">
+                country = #{map.contry},
+            </if>
+        </trim>
+        where id = {map.id}
+    </update>
+
+    <delete id="delete" parameterType="com.transation.model.Fruit">
+        DELETE FROM fruit
+        <where>
+            <if test="id!=null">
+                id = #{id}
+            </if>
+            <if test="map.name!=null">
+                and name = #{map.name}
+            </if>
+            <if test="map.price!=null">
+                and price = #{map.price}
+            </if>
+            <if test="map.country!=null">
+                and country = #{map.contry}
+            </if>
+        </where>
+    </delete>
+
+    <select id="select" parameterType="com.transation.model.Fruit" resultType="java.util.List">
+        SELECT * from fruit
+          <where>
+              <if test="id!=null">
+                  id = #{id}
+              </if>
+              <if test="name!=null">
+                  and name LIKE CONCAT(CONCAT('%', #{name},'%')
+              </if>
+              <if test="price!=null">
+                  and price = #{price}
+              </if>
+              <if test="country!=null">
+                  and country = #{country}
+              </if>
+          </where>
+    </select>
+</mapper>

@@ -1,0 +1,46 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="/static/js/angularjs/angular.min.js"></script>
+    <script src="/static/js/htmlJs/test.js"></script>
+    <script src="/static/js/htmlJs/service.js"></script>
+</head>
+<body ng-app="modelApp" ng-controller="modelListCtrl">
+<input type="button" value="点一下" ng-click="show()">
+<input type="button" value="新增" ng-click="showForm()">
+<div ng-show="Form">
+    <form>
+        <div>
+            name:   <input type="text" ng-model="name">
+        </div>
+        <div>
+            price:  <input type="text" ng-model="price">
+        </div>
+        <div>
+            country:<input type="text" ng-model="country">
+        </div>
+        <div>
+            <input type="button" value="提交" ng-click="submit()"/>
+            <input type="button" value="取消" ng-click="showform()"/>
+        </div>
+    </form>
+</div>
+<div>
+    <table>
+        <tr>
+            <td>Fruit</td>
+            <td>price($ pre kg)</td>
+            <td>country</td>
+        </tr>
+        <tr ng-repeat="Fruit in fruits">
+            <td>[[Fruit.name]]</td>
+            <td>[[Fruit.price]]</td>
+            <td>[[Fruit.country]]</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+
+
